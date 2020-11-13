@@ -36,12 +36,8 @@ const transaction={
 }
 transactions.push(transaction)
 
-
-
-
-
 // pushing transaction 
-addTransactionDom(transaction)
+addTransactionDOM(transaction);
 updateValues()
 text.value=""
 amount.value=""
@@ -59,30 +55,34 @@ function generateID()
 
 
 // update trans in Dom
-function addTransactionDom(transaction)
-{
-    const sign = transaction.amount < 0 ? '-' : '+';
-    const item=document.createElement("li")
-    item.classList.add(transaction.amount < 0 ? `minus`:`plus`)
-    item.innerHTML = `
+function addTransactionDOM(transaction) {
+  // Get sign
+  const sign = transaction.amount < 0 ? '-' : '+';
+
+  const item = document.createElement('li');
+
+  // Add class based on value
+  item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
+
+  item.innerHTML = `
     ${transaction.text} <span>${sign}${Math.abs(
     transaction.amount
   )}</span> <button class="delete-btn" onclick="removeTransaction(${
     transaction.id
   })">x</button>
   `;
-    list.appendChild(item)
+
+  list.appendChild(item);
 }
 
 // remove
 function removeTransaction(id) {
-  transactions = transactions.filter(i => i.id !== id);
+  transactions = transactions.filter(transaction => transaction.id !== id);
 
 
 
   init();
 }
-
 
 
 
